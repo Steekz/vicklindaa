@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Coração é Seu!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <div class="container">
+        <header>
+            <div class="hello-kitty-header">
+                <img src="https://cdn.discordapp.com/attachments/1404154385180917881/1418334468933947445/hellokitty8-removebg-preview.png?ex=68cdbe68&is=68cc6ce8&hm=1f68bcef87db7be405b74789dd655e759961293e9db966b57f8ebcfb32fd12f4&" alt="Hello Kitty" class="hello-kitty-img">
+            </div>
+        </header>
+
+        <main>
+            <div class="message-from-kitty">
+                <div class="message-bubble">
+                    <p>Olá, Vick Linda!</p>
+                    <p>Aqui é a Hello Kitty passando para perguntar uma coisa muito importante… </p>
+                    <p>Será que você aceitaria namorar o Isaac?</p>
+                </div>
+            </div>
+
+            <div class="photos-section">
+                <div class="photos-container">
+                    <div class="photo-card">
+                        <div class="photo-frame">
+                            <div class="photo-placeholder" id="her-photo">
+                                <img src="https://cdn.discordapp.com/attachments/1404154385180917881/1418338651456143490/image.png?ex=68cdc24d&is=68cc70cd&hm=fb29a9efadfb256c492e0235dc8018e019eba848aa452f848f55c3d39a4c8ad0&" alt="Foto dela">
+                                <div class="photo-overlay">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hearts-connector">
+                        <div class="heart-pulse"></div>
+                        <div class="heart-pulse"></div>
+                        <div class="heart-pulse"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-frame">
+                            <div class="photo-placeholder" id="my-photo">
+                                <img src="https://cdn.discordapp.com/attachments/1404154385180917881/1418338814497132624/image.png?ex=68cdc274&is=68cc70f4&hm=4fef0358a06ac74fefa4569d542ae6f1e44bb5d204860ac073a1f1ddc253b87f&" alt="Minha foto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h2 class="section-title">Você quer namorar comigo?</h2>
+                <div class="buttons">
+                    <button class="btn yes-btn">
+                        <svg class="btn-icon" viewBox="0 0 32 29.6">
+                            <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                        </svg>
+                        Sim
+                    </button>
+                    <button class="btn maybe-btn">
+                        <svg class="btn-icon" viewBox="0 0 512 512">
+                            <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"/>
+                            <path d="M296 256c0 22.1-17.9 40-40 40s-40-17.9-40-40 17.9-40 40-40 40 17.9 40 40zm-40-152c-13.3 0-24 10.7-24 24v112c0 13.3 10.7 24 24 24s24-10.7 24-24V128c0-13.3-10.7-24-24-24z"/>
+                        </svg>
+                        Talvez
+                    </button>
+                    <button class="btn no-btn">
+                        <svg class="btn-icon" viewBox="0 0 512 512">
+                            <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"/>
+                            <path d="M328 328c-4.1 0-7.8-1.6-10.6-4.4L256 266.1l-61.4 57.5c-2.8 2.8-6.5 4.4-10.6 4.4s-7.8-1.6-10.6-4.4-4.4-6.5-4.4-10.6 1.6-7.8 4.4-10.6l61.4-57.5-61.4-57.5c-2.8-2.8-4.4-6.5-4.4-10.6s1.6-7.8 4.4-10.6 6.5-4.4 10.6-4.4 7.8 1.6 10.6 4.4L256 245.9l61.4-57.5c2.8-2.8 6.5-4.4 10.6-4.4s7.8 1.6 10.6 4.4 4.4 6.5 4.4 10.6-1.6 7.8-4.4 10.6L277.9 256l61.4 57.5c2.8 2.8 4.4 6.5 4.4 10.6s-1.6 7.8-4.4 10.6-6.5 4.4-10.6 4.4z"/>
+                        </svg>
+                        Não
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <div class="declaration hidden">
+            <div class="declaration-content">
+                <div class="declaration-header">
+                    <svg class="declaration-heart" viewBox="0 0 32 29.6">
+                        <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                        c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                    </svg>
+                    <h2>Eu te amo!</h2>
+                    <svg class="declaration-heart" viewBox="0 0 32 29.6">
+                        <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                        c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                    </svg>
+                </div>
+                <p>Você é a pessoa mais especial da minha vida. Cada momento ao seu lado é único e quero viver muitos outros ao seu lado. Você me completa e me faz a pessoa mais feliz do mundo!</p>
+                <div class="signature">
+                    <p>Com todo meu amor,</p>
+                    <p id="my-name">Isaac</p>
+                </div>
+                <button class="btn close-btn">Fechar</button>
+            </div>
+        </div>
+
+        
+    <div class="floating-hearts"></div>
+    
+    <input type="file" id="photo-input" accept="image/*" style="display: none;">
+    
+    <script src="script.js"></script>
+</body>
+</html>
